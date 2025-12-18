@@ -1,24 +1,21 @@
 # Data Processing & Engineering
 
-pandas>=2.0.0
-numpy>=1.24.0
+pandas
+numpy
 
 # Machine Learning & Modeling
-scikit-learn>=1.3.0
-xgboost>=2.0.0
+scikit-learn
+xgboost
 
 # Handling Imbalanced Data
-imbalanced-learn>=0.11.0
+imbalanced-learn
 
 # Explainable AI
-shap>=0.42.0
+shap
 
 # Visualization
-matplotlib>=3.7.0
-seaborn>=0.12.0
+matplotlib
+seaborn
 
 # Deployment
-flask>=2.3.0
-
-# Development
-jupyter>=1.0.0
+flask
