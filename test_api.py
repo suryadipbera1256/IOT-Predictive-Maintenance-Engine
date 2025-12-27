@@ -1,12 +1,11 @@
 import requests
 import json
 
-# 1. Define the URL
+# Define the URL
 url = 'http://127.0.0.1:5000/api/predict'
 
-# 2. Define Example Data
-# MUST match the columns your model expects:
-# ['temperature', 'pressure', 'vibration', 'machine_id', 'temperature_roll_mean', 'pressure_roll_mean', 'vibration_roll_mean']
+#Define Example Data
+
 sensor_data = {
     "temperature": 642.35,
     "pressure": 554.45,

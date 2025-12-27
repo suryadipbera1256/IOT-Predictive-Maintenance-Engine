@@ -4,9 +4,8 @@ from flask import Flask, request, jsonify, render_template_string
 
 app = Flask(__name__)
 
-# 1. Load the Trained Model
+#Load the Trained Model
 try:
-    # Load the entire artifact (which is a dictionary)
     model_artifact = joblib.load('best_model.pkl')
     
     # Check if it's a dictionary (the new "bundled" format)
@@ -14,8 +13,6 @@ try:
         model = model_artifact['model']
         print("✅ Model loaded successfully (from artifact bundle).")
         
-        # Optional: You can also load the optimized threshold if you want to use it
-        # threshold = model_artifact.get('threshold', 0.5) 
     else:
         # Fallback for older .pkl files that might just be the model
         model = model_artifact
@@ -25,7 +22,7 @@ except Exception as e:
     print(f"❌ Error loading model: {e}")
     model = None
 
-# 2. Helper Function to Format Data
+#Format Data
 def prepare_input(data_dict):
     """
     Ensures input data has the exact columns and order the model expects.
@@ -36,14 +33,12 @@ def prepare_input(data_dict):
         'temperature_roll_mean', 'pressure_roll_mean', 'vibration_roll_mean'
     ]
     
-    # Convert dictionary values to float/int
-    # (The list comprehension filters out machine_id if it's sent in the request)
     processed_data = {k: float(v) for k, v in data_dict.items() if k in feature_order}
     
     # Create DataFrame with specific column order
     return pd.DataFrame([processed_data])[feature_order]
 
-# 3. HTML Template for the User Interface
+# Template
 html_template = """
 <!DOCTYPE html>
 <html>
@@ -126,7 +121,7 @@ html_template = """
 </html>
 """
 
-# --- ROUTES ---
+# ROUTES
 
 @app.route('/', methods=['GET', 'POST'])
 def home():

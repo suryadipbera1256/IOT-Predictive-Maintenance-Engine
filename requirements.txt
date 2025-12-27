@@ -1,22 +1,15 @@
-# Data Processing & Engineering
-
 pandas
 numpy
 
-# Machine Learning & Modeling
 scikit-learn
 xgboost
 
-# Handling Imbalanced Data
 imbalanced-learn
 
-# Explainable AI
 shap
 
-# Visualization
 matplotlib
 seaborn
 
-# Deployment
 flask
 requests
