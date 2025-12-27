@@ -6,8 +6,21 @@ app = Flask(__name__)
 
 # 1. Load the Trained Model
 try:
-    model = joblib.load('best_model.pkl')
-    print("✅ Model loaded successfully.")
+    # Load the entire artifact (which is a dictionary)
+    model_artifact = joblib.load('best_model.pkl')
+    
+    # Check if it's a dictionary (the new "bundled" format)
+    if isinstance(model_artifact, dict) and 'model' in model_artifact:
+        model = model_artifact['model']
+        print("✅ Model loaded successfully (from artifact bundle).")
+        
+        # Optional: You can also load the optimized threshold if you want to use it
+        # threshold = model_artifact.get('threshold', 0.5) 
+    else:
+        # Fallback for older .pkl files that might just be the model
+        model = model_artifact
+        print("✅ Model loaded successfully (direct object).")
+        
 except Exception as e:
     print(f"❌ Error loading model: {e}")
     model = None
@@ -16,15 +29,15 @@ except Exception as e:
 def prepare_input(data_dict):
     """
     Ensures input data has the exact columns and order the model expects.
-    Model expects: ['temperature', 'pressure', 'vibration', 'machine_id', 
-                    'temperature_roll_mean', 'pressure_roll_mean', 'vibration_roll_mean']
     """
+    # REMOVED 'machine_id' from this list to match training data
     feature_order = [
-        'temperature', 'pressure', 'vibration', 'machine_id',
+        'temperature', 'pressure', 'vibration', 
         'temperature_roll_mean', 'pressure_roll_mean', 'vibration_roll_mean'
     ]
     
     # Convert dictionary values to float/int
+    # (The list comprehension filters out machine_id if it's sent in the request)
     processed_data = {k: float(v) for k, v in data_dict.items() if k in feature_order}
     
     # Create DataFrame with specific column order
