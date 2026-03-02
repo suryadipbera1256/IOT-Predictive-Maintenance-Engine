@@ -28,9 +28,9 @@ graph TD
     D[The Publisher<br>LinkedIn OAuth 2.0 API] -->|HTTP POST| F[(Live LinkedIn Feed)]
     end
     
-    classDef ai fill:#e1bee7,stroke:#8e24aa,stroke-width:2px;
-    classDef api fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
-    classDef web fill:#bbdefb,stroke:#1976d2,stroke-width:2px;
+    classDef ai fill:#e1bee7,stroke:#8e24aa,stroke-width:1px;
+    classDef api fill:#c8e6c9,stroke:#388e3c,stroke-width:1px;
+    classDef web fill:#bbdefb,stroke:#1976d2,stroke-width:1px;
     
     class B,C ai;
     class D api;
