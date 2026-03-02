@@ -5,36 +5,49 @@
 > **Status:** Prototype Phase
 
 ---
-###  System Architecture
+### 🏗️ System Architecture
+
+The predictive maintenance pipeline is designed for real-time sensor ingestion, robust data preprocessing, and highly interpretable machine learning predictions.
+
 ```mermaid
-graph TD
-    Z[Windows Task Scheduler] -->|Triggers at 06:00 & 21:00| A
-    
-    subgraph Data Ingestion
-    A[Extractor<br>Selenium WebDriver] -->|Raw Feed Text| B
-    end
+flowchart LR
+  classDef factory fill:#0f172a,stroke:#334155,color:#fff,stroke-width:2px
+  classDef process fill:#1e293b,stroke:#0891b2,color:#fff,stroke-width:2px
+  classDef model fill:#312e81,stroke:#6366f1,color:#fff,stroke-width:2px
+  classDef app fill:#064e3b,stroke:#10b981,color:#fff,stroke-width:2px
+  classDef alert fill:#7f1d1d,stroke:#ef4444,color:#fff,stroke-width:2px
+  classDef safe fill:#14532d,stroke:#22c55e,color:#fff,stroke-width:2px
 
-    subgraph AI Processing
-    B{The Brain<br>Gemini 2.5 Flash API} -->|Generates Post Text| D
-    B -->|Generates Image Prompt| C
-    end
+  subgraph IoT [IoT Sensors]
+    S(Temp, Pressure, Vibration)
+  end
 
-    subgraph Content Generation
-    C[The Creator<br>Hugging Face API] -->|Stable Diffusion XL| E((generated_image.png))
-    end
+  subgraph Pipeline [Data Pipeline]
+    P1(Interpolate & Roll Mean) --> P2(SMOTE)
+  end
 
-    subgraph Publishing
-    E --> D
-    D[The Publisher<br>LinkedIn OAuth 2.0 API] -->|HTTP POST| F[(Live LinkedIn Feed)]
-    end
-    
-    classDef ai fill:#e1bee7,stroke:#8e24aa,stroke-width:1px;
-    classDef api fill:#c8e6c9,stroke:#388e3c,stroke-width:1px;
-    classDef web fill:#bbdefb,stroke:#1976d2,stroke-width:1px;
-    
-    class B,C ai;
-    class D api;
-    class A web;
+  subgraph Engine [ML Engine]
+    M1(XGBoost) --- M2(SHAP Explainer)
+  end
+
+  subgraph Deploy [Deployment]
+    D(Flask UI & API)
+  end
+
+  IoT --> Pipeline
+  Pipeline --> Engine
+  Engine --> Deploy
+  Deploy --> T{Prob >= 50%?}
+  
+  T -- Yes --> Danger(CRITICAL RISK)
+  T -- No --> Safe(Healthy)
+
+  class S factory
+  class P1,P2 process
+  class M1,M2 model
+  class D app
+  class Danger alert
+  class Safe safe
 ```
 
 ---
