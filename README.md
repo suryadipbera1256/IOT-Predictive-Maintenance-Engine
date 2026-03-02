@@ -5,10 +5,7 @@
 > **Status:** Prototype Phase
 
 ---
-### 🏗️ System Architecture
-
-This project follows a modular, automated pipeline running on a scheduled cron job:
-
+###  System Architecture
 ```mermaid
 graph TD
     Z[Windows Task Scheduler] -->|Triggers at 06:00 & 21:00| A
@@ -38,6 +35,7 @@ graph TD
     class B,C ai;
     class D api;
     class A web;
+```
 
 ---
 
