@@ -1,0 +1,26 @@
+[
+  {
+    "feature": "temperature_roll_mean",
+    "importance": 2.477489948272705
+  },
+  {
+    "feature": "vibration_roll_mean",
+    "importance": 1.4177113771438599
+  },
+  {
+    "feature": "pressure_roll_mean",
+    "importance": 1.00245201587677
+  },
+  {
+    "feature": "vibration",
+    "importance": 0.4880492687225342
+  },
+  {
+    "feature": "pressure",
+    "importance": 0.32502293586730957
+  },
+  {
+    "feature": "temperature",
+    "importance": 0.14670076966285706
+  }
+]

@@ -1,8 +1,47 @@
-# 🏭 FactoryGuard AI: IoT Predictive Maintenance Engine
+# FactoryGuard AI: IoT Predictive Maintenance Engine
 
-> **Capstone Project:** Infotact Solutions - Data Science Engineering Track (Cohort Zeta)  
+> **Capstone Project:** Data Science Engineering Track 
 > **Domain:** Manufacturing / IoT  
-> **Status:** Prototype Phase (Week 2)
+> **Status:** Prototype Phase
+
+---
+##  System Architecture
+`flowchart LR
+  classDef factory fill:#0f172a,stroke:#334155,color:#fff,stroke-width:2px
+  classDef process fill:#1e293b,stroke:#0891b2,color:#fff,stroke-width:2px
+  classDef model fill:#312e81,stroke:#6366f1,color:#fff,stroke-width:2px
+  classDef app fill:#064e3b,stroke:#10b981,color:#fff,stroke-width:2px
+  classDef alert fill:#7f1d1d,stroke:#ef4444,color:#fff,stroke-width:2px
+  classDef safe fill:#14532d,stroke:#22c55e,color:#fff,stroke-width:2px
+
+  subgraph IoT [Sensors]
+    S(Temp Pressure Vib)
+  end
+  class IoT factory
+
+  subgraph Pipeline [Data Pipeline]
+    P1(Interpolate and Roll Mean) --> P2(SMOTE)
+  end
+  class Pipeline process
+
+  subgraph Engine [ML Engine]
+    M1(XGBoost) --- M2(SHAP)
+  end
+  class Engine model
+
+  subgraph Deploy [Deployment]
+    D(Flask UI and API)
+  end
+  class Deploy app
+
+  IoT --> Pipeline --> Engine --> Deploy
+  Deploy --> T{Prob >= 50%?}
+  T -- Yes --> Danger(CRITICAL RISK)
+  T -- No --> Safe(Healthy)
+
+  class Danger alert
+  class Safe safe
+`
 
 ---
 
