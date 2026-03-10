@@ -1,4 +1,4 @@
-https://github.com/user-attachments/assets/0f6a6ca1-7532-4d87-bd5d-97b1f7aa66b6
+<video src="[YOUR_VIDEO_URL.mp4](https://github.com/user-attachments/assets/0f6a6ca1-7532-4d87-bd5d-97b1f7aa66b6)" width="100%" controls autoplay loop muted></video>
 # FactoryGuard AI: IoT Predictive Maintenance Engine
 
 > **Capstone Project:** Data Science Engineering Track 
